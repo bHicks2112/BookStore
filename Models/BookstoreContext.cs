@@ -12,11 +12,13 @@ namespace BookStore.Models
     {
         public BookstoreContext()
         {
+
         }
 
         public BookstoreContext(DbContextOptions<BookstoreContext> options)
             : base(options)
         {
+
         }
 
         public DbSet<Books> Books { get; set; }

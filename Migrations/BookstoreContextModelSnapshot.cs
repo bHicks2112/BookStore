@@ -90,9 +90,6 @@ namespace BookStore.Migrations
                     b.Property<string>("AddressLine3")
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("Anonymous")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("City")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -109,7 +106,7 @@ namespace BookStore.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("zip")
+                    b.Property<string>("Zip")
                         .HasColumnType("TEXT");
 
                     b.HasKey("CheckOutId");
