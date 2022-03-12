@@ -11,13 +11,13 @@
 
 @code {
 
-    public iBookStoreRepository repo => Service;
-    public IEnumerable<Models.Books> BookData { get; set; }
+    public ICheckOutRepository repo => Service;
+    public IEnumerable<Models.CheckOut> BookData { get; set; }
 
 
-    public IEnumerable<Shipped> AllPurchases { get; set; }
-    public IEnumerable<Shipped> UnShippedPurchases { get; set; }
-    public IEnumerable<Shipped> ShippedPurchases { get; set; }
+    public IEnumerable<CheckOut> AllPurchases { get; set; }
+    public IEnumerable<CheckOut> UnShippedPurchases { get; set; }
+    public IEnumerable<CheckOut> ShippedPurchases { get; set; }
 
     protected async override Task OnInitializedAsync()
     {
@@ -26,9 +26,9 @@
 
     public async Task UpdateData()
     {
-        AllPurchases = await repo.Books.ToListAsync();
-        UnShippedPurchases = AllPurchases.Where(x => !x.BookAdded);
-        ShippedPurchases = AllPurchases.Where(x => x.BookAdded);
+        AllPurchases = await repo.CheckOut.ToListAsync();
+        UnShippedPurchases = AllPurchases.Where(x => !x.Shipped);
+        ShippedPurchases = AllPurchases.Where(x => x.Shipped);
 
 
     }
@@ -38,8 +38,8 @@
 
     private void UpdatePurchase (int id, bool shipped)
     {
-        Shipped s = repo.Books.FirstOrDefault(x => x.BookId == id);
-        s.PurchaseShipped = shipped;
+        Shipped s = repo.CheckOut.FirstOrDefault(x => x.CheckOutId == id);
+        s.UnShippedPurchases = shipped;
         repo.SaveCheckOut(s);
     }
 }
