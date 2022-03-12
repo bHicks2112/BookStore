@@ -32,6 +32,12 @@ namespace BookStore.Models
 
         public bool Anonymous { get; set; }
 
+        [BindNever]
+
+        public bool Shipped { get; set; }
+
+        public bool BookAdded { get; set; }
+
 
     }
 }
