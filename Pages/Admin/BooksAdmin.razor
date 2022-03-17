@@ -14,7 +14,8 @@
     </thead>
 
     <tbody>
-        @if (BookData>.Count() > 0)
+        
+        @if (BookData?.Count() > 0)
             {
                 //List the Books
                 @foreach (Books b in BookData)
@@ -53,14 +54,14 @@
 
     public IEnumerable<Books> BookData { get; set; }
 
-    protected async override Task OnInitializeAsync()
+    protected async override Task OnInitializedAsync()
     {
         await UpdateData();
     }
 
     public async Task UpdateData()
     {
-        BookData = await repo.Books.ToListAsync()
+        BookData = await repo.Books.ToListAsync();
     }
 
 

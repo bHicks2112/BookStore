@@ -6,9 +6,9 @@
     </thead>
 
     <tbody>
-        @if (Shipped?.Count() > 0)
+        @if (CheckOuts?.Count() > 0)
             {
-                @foreach (CheckOut co in Shipped)
+                @foreach (CheckOut co in CheckOuts)
                 {
                     <tr>
                         <td>@co.Name</td>
@@ -17,7 +17,7 @@
                         <th>Quantity</th>
 
                         <td>
-                            <button class="btn btn-sm btn-danger" @onclick="@(x => PurchaseSelected.InvokeAsync(s.BookId))">
+                            <button class="btn btn-sm btn-danger" @onclick="@(x => PurchaseSelected.InvokeAsync(co.CheckOutId))">
                                 @ButtonLabel
                             </button>
                         </td>
@@ -47,7 +47,7 @@
     public string TableTitle { get; set; } = "Purchases";
 
     [Parameter]
-    public IEnumerable<Shipped> Shipped { get; set; }
+    public IEnumerable<CheckOut> CheckOuts { get; set; }
 
     [Parameter]
     public string ButtonLabel { get; set; } = "Shipped";

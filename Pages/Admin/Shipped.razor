@@ -1,17 +1,17 @@
 ﻿@page "/admin/shipped"
-@inherits OwningComponentBase<iBookStoreRepository>
+@inherits OwningComponentBase<ICheckOutRepository>
 
-<ShippedTable TableTitle="UnShipped Purchases" Shipped="UnShippedPurchases"
+<ShippedTable TableTitle="UnShipped Purchases" CheckOuts="UnShippedPurchases"
               ButtonLabel="Shipped" PurchaseSelected="ShipPurchase"></ShippedTable>
 
-<ShippedTable TableTitle="Shipped Purchases" Shipped="ShippedPurchases"
+<ShippedTable TableTitle="Shipped Purchases" CheckOuts="ShippedPurchases"
               ButtonLabel="Reset" PurchaseSelected="ResetPurchase"></ShippedTable>
 
 <button class="btn btn-info" @onclick="@(x => UpdateData())">Refresh Data</button>
 
 @code {
 
-    public ICheckOutRepository repo => Service;
+    ICheckOutRepository repo => Service;
     public IEnumerable<Models.CheckOut> BookData { get; set; }
 
 
@@ -38,8 +38,8 @@
 
     private void UpdatePurchase (int id, bool shipped)
     {
-        Shipped s = repo.CheckOut.FirstOrDefault(x => x.CheckOutId == id);
-        s.UnShippedPurchases = shipped;
+        CheckOut s = repo.CheckOut.FirstOrDefault(x => x.CheckOutId == id);
+        s.Shipped = shipped;
         repo.SaveCheckOut(s);
     }
 }
